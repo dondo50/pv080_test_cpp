@@ -1,4 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
+#define STR(x) STR2(x)
+#define STR2(x) #x
+
 
 #include "stdio.h"
 #include "string.h"
@@ -36,13 +39,13 @@ void demoBufferOverflowData() {
 	printf("login as: ");
 	fflush(stdout);
 	//gets(userName); // use scanf("%s", userName); if gets fails with identifier not found
-	scanf("%s", userName);
+	scanf("%" STR(USER_INPUT_MAX_LENGTH) "s", userName);
 
 	// Get password
 	printf("%s@vulnerable.machine.com: ", userName);
 	fflush(stdout);
 	//gets(passwd);  
-	scanf("%s", passwd); // use scanf("%s", passwd); if gets fails with identifier not found
+	scanf("%" STR(USER_INPUT_MAX_LENGTH) "s", passwd); // use scanf("%s", passwd); if gets fails with identifier not found
 
 	// Check user rights (set to NORMAL_USER and not changed in code)
 	if (userRights == NORMAL_USER) {
